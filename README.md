@@ -1,4 +1,6 @@
-# [![EruptusPE](https://i.imgur.com/kLCLfLC.png)](http://eruptuspe.tk) 
+# [![EruptusPE](https://i.imgur.com/fgVMXSe.png?1)]()
+
+<a href="https://discord.gg/znEsFsG"><img src="https://discordapp.com/api/guilds/425712766687510528/embed.png" alt="Discord server"/></a> 
 
 [![](https://poggit.pmmp.io/shield.state/AdvancedFly)](https://poggit.pmmp.io/p/AdvancedFly)
 
