@@ -1,0 +1,14 @@
+---
+# AdvancedFly by iiFlamiinBlaze
+#   Simple yet advanced survival fly plugin!
+#   Github: https://github.com/iiFlamiinBlaze
+
+# Default Config:
+#    FlyReset_OnJoin: true
+#    FlyReset_OnDamage: true
+
+# The below config allows the plugin to reset flight mode when joining the server
+onJoin_FlyReset: true
+# The below config allows the plugin to reset flight mode when pvping in the server
+onDamage_FlyReset: true
+...

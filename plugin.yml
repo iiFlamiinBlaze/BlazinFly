@@ -1,0 +1,14 @@
+name: AdvancedFly
+main: iiFlamiinBlaze\AdvancedFly\AdvancedFly
+description: An advanced survival fly plugin!
+version: 1.8
+api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10, 3.0.0-ALPHA11]
+author: iiFlamiinBlaze
+load: POSTWORLD
+commands:
+  fly:
+    description: "Command which allows flight when in Survival Mode!"
+permissions:
+  fly.command:
+    description: "AdvancedFly command permission"
+    default: op
