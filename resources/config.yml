@@ -4,8 +4,8 @@
 #   Github: https://github.com/iiFlamiinBlaze
 
 # Default Config:
-#    FlyReset_OnJoin: true
-#    FlyReset_OnDamage: true
+#    onJoin_FlyReset: true
+#    onDamage_FlyReset: true
 
 # The below config allows the plugin to reset flight mode when joining the server
 onJoin_FlyReset: true

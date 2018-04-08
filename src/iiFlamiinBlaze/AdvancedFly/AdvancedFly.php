@@ -2,13 +2,13 @@
 /**
  * Copyright (C) 2018 iiFlamiinBlaze
  *
- * iiFlamiinBlaze's plugins are licensed under GPL-3.0 license!
+ * iiFlamiinBlaze's plugins are licensed under MIT license!
  * Made by iiFlamiinBlaze for the PocketMine-MP Community!
  *
  * @author iiFlamiinBlaze
  * Twitter: https://twitter.com/iiFlamiinBlaze
  * GitHub: https://github.com/iiFlamiinBlaze
- * Discord: https://bit.ly/epediscord
+ * Discord: https://discord.gg/znEsFsG
  */
 declare(strict_types=1);
 
@@ -39,11 +39,10 @@ class AdvancedFly extends PluginBase implements Listener{
         $player = $event->getPlayer();
         $config = $this->getConfig();
         if($config->getNested("onJoin_FlyReset") === true){
-            if(!$player->isCreative()){
-                $player->setAllowFlight(false);
-                $player->setFlying(false);
-                $player->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "Flight has been disabled.");
-            }
+            if($player->isCreative()) return;
+            $player->setAllowFlight(false);
+            $player->setFlying(false);
+            $player->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "Flight has been disabled.");
         }
     }
 
@@ -53,23 +52,22 @@ class AdvancedFly extends PluginBase implements Listener{
                 $sender->sendMessage(TextFormat::RED . "Use this command in-game.");
                 return false;
             }
-            if($sender->hasPermission("fly.command")){
-                if(!$sender->isCreative()){
-                    if(!$sender->getAllowFlight()){
-                        $sender->setAllowFlight(true);
-                        $sender->setFlying(true);
-                        $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::GREEN . "Flight mode activated.");
-                    }else{
-                        $sender->setAllowFlight(false);
-                        $sender->setFlying(false);
-                        $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "Regular mode activated.");
-                    }
+            if(!$sender->hasPermission("fly.command")){
+                $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "You do not have permission to use this command");
+                return false;
+            }
+            if(!$sender->isCreative()){
+                if(!$sender->getAllowFlight()){
+                    $sender->setAllowFlight(true);
+                    $sender->setFlying(true);
+                    $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::GREEN . "Flight mode activated.");
                 }else{
-                    $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "You can only use this command in survival mode.");
-                    return false;
+                    $sender->setAllowFlight(false);
+                    $sender->setFlying(false);
+                    $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "Regular mode activated.");
                 }
             }else{
-                $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "You do not have permission to use this command");
+                $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "You can only use this command in survival mode.");
                 return false;
             }
         }
@@ -84,13 +82,11 @@ class AdvancedFly extends PluginBase implements Listener{
                 if($event instanceof EntityDamageByEntityEvent){
                     $damager = $event->getDamager();
                     if($damager instanceof Player){
-                        if(!$damager->isCreative()){
-                            if($damager->getAllowFlight()){
-                                $damager->sendMessage(AdvancedFly::PREFIX . TextFormat::DARK_RED . "Flight mode disabled due to combat.");
-                                $damager->setAllowFlight(false);
-                                $damager->setFlying(false);
-                            }
-                        }
+                        if($damager->isCreative()) return;
+                        if(!$damager->getAllowFlight()) return;
+                        $damager->sendMessage(AdvancedFly::PREFIX . TextFormat::DARK_RED . "Flight mode disabled due to combat.");
+                        $damager->setAllowFlight(false);
+                        $damager->setFlying(false);
                     }
                 }
             }
