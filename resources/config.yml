@@ -1,14 +1,18 @@
----
-# AdvancedFly by iiFlamiinBlaze
-#   Simple yet advanced survival fly plugin!
-#   Github: https://github.com/iiFlamiinBlaze
+#  ____  _            _______ _          _____
+# |  _ \| |          |__   __| |        |  __ \
+# | |_) | | __ _ _______| |  | |__   ___| |  | | _____   __
+# |  _ <| |/ _` |_  / _ \ |  | '_ \ / _ \ |  | |/ _ \ \ / /
+# | |_) | | (_| |/ /  __/ |  | | | |  __/ |__| |  __/\ V /
+# |____/|_|\__,_/___\___|_|  |_| |_|\___|_____/ \___| \_/
 
-# Default Config:
-#    onJoin_FlyReset: true
-#    onDamage_FlyReset: true
+# AdvancedFly Configuration File:
+#   Default Config:
+#      onJoin_FlyReset: true
+#      onDamage_FlyReset: true
 
 # The below config allows the plugin to reset flight mode when joining the server
 onJoin_FlyReset: true
+
 # The below config allows the plugin to reset flight mode when pvping in the server
 onDamage_FlyReset: true
 ...
