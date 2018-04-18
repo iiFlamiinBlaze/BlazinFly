@@ -31,15 +31,15 @@ use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\utils\TextFormat;
 
-class AdvancedFly extends PluginBase implements Listener{
+class BlazinFly extends PluginBase implements Listener{
 
-    const PREFIX = TextFormat::GREEN . "AdvancedFly" . TextFormat::AQUA . " > " . TextFormat::WHITE;
+    const PREFIX = TextFormat::GREEN . "BlazinFly" . TextFormat::AQUA . " > " . TextFormat::WHITE;
 
     public function onEnable() : void{
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
-        $this->getLogger()->info(AdvancedFly::PREFIX . "AdvancedFly by iiFlamiinBlaze enabled");
+        $this->getLogger()->info(self::PREFIX . "BlazinFly by iiFlamiinBlaze enabled");
     }
 
     public function onJoin(PlayerJoinEvent $event) : void{
@@ -49,7 +49,7 @@ class AdvancedFly extends PluginBase implements Listener{
             if($player->isCreative()) return;
             $player->setAllowFlight(false);
             $player->setFlying(false);
-            $player->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "Flight has been disabled");
+            $player->sendMessage(self::PREFIX . TextFormat::RED . "Flight has been disabled");
         }
     }
 
@@ -60,21 +60,21 @@ class AdvancedFly extends PluginBase implements Listener{
                 return false;
             }
             if(!$sender->hasPermission("fly.command")){
-                $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "You do not have permission to use this command");
+                $sender->sendMessage(self::PREFIX . TextFormat::RED . "You do not have permission to use this command");
                 return false;
             }
             if(!$sender->isCreative()){
                 if(!$sender->getAllowFlight()){
                     $sender->setAllowFlight(true);
                     $sender->setFlying(true);
-                    $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::GREEN . "Flight mode activated");
+                    $sender->sendMessage(self::PREFIX . TextFormat::GREEN . "Flight mode activated");
                 }else{
                     $sender->setAllowFlight(false);
                     $sender->setFlying(false);
-                    $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "Regular mode activated");
+                    $sender->sendMessage(self::PREFIX . TextFormat::RED . "Regular mode activated");
                 }
             }else{
-                $sender->sendMessage(AdvancedFly::PREFIX . TextFormat::RED . "You can only use this command in survival mode");
+                $sender->sendMessage(self::PREFIX . TextFormat::RED . "You can only use this command in survival mode");
                 return false;
             }
         }
@@ -91,7 +91,7 @@ class AdvancedFly extends PluginBase implements Listener{
                     if(!$damager instanceof Player) return;
                     if($damager->isCreative()) return;
                     if($damager->getAllowFlight() === true){
-                        $damager->sendMessage(AdvancedFly::PREFIX . TextFormat::DARK_RED . "Flight mode disabled due to combat");
+                        $damager->sendMessage(self::PREFIX . TextFormat::DARK_RED . "Flight mode disabled due to combat");
                         $damager->setAllowFlight(false);
                         $damager->setFlying(false);
                     }

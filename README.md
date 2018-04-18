@@ -5,14 +5,13 @@
 [![](https://poggit.pmmp.io/shield.state/AdvancedFly)](https://poggit.pmmp.io/p/AdvancedFly)
 
 ## License
-* [License File](https://github.com/iiFlamiinBlaze/AdvancedFly/blob/master/LICENSE), make sure to read all of the license!
+* [BlazinFly License](https://github.com/iiFlamiinBlaze/BlazinFly/blob/master/LICENSE), make sure to read all of the license!
 * This license is subject to change at anytime! 
 
 ## Information
-* This plugin allows you to use /fly in survival mode to fly!
-* This plugin is for anyone to use!
+This plugin allows you to use /fly in survival mode to fly! Anyone is allowed to use this plugin.
 * Credits: [iiFlamiinBlaze](https://github.com/iiFlamiinBlaze)
-* Anyone associated with leet.cc (beetree, spajk, MrCakeSlayer etc.) MAY NOT use this plugin!!!! 
+* **Anyone associated with leet.cc (beetree, spajk, MrCakeSlayer etc.) MAY NOT use this plugin!**
 
 ## How to use
-* [AdvancedFly Wiki](https://github.com/iiFlamiinBlaze/AdvancedFly/wiki)
+* [BlazinFly Wiki](https://github.com/iiFlamiinBlaze/BlazinFly/wiki)
