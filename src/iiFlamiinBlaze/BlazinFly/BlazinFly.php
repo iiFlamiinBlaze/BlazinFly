@@ -34,7 +34,7 @@ use pocketmine\utils\TextFormat;
 class BlazinFly extends PluginBase implements Listener{
 
     const PREFIX = TextFormat::AQUA . "BlazinFly" . TextFormat::GOLD . " > ";
-    const VERSION = "v1.8.3";
+    const VERSION = "v1.8.4";
 
     public function onEnable() : void{
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -45,10 +45,9 @@ class BlazinFly extends PluginBase implements Listener{
 
     public function onJoin(PlayerJoinEvent $event) : void{
         $player = $event->getPlayer();
-        if($this->getConfig()->get("onJoin_FlyReset") === true){
+        if($this->getConfig()->get("onJoin-FlyReset") === true){
             if($player->isCreative()) return;
             $player->setAllowFlight(false);
-            $player->setFlying(false);
             $player->sendMessage($this->getConfig()->get("fly_disabled"));
         }
     }
@@ -63,18 +62,40 @@ class BlazinFly extends PluginBase implements Listener{
                 $sender->sendMessage(self::PREFIX . TextFormat::RED . "You do not have permission to use this command");
                 return false;
             }
-            if(!$sender->isCreative()){
-                if(!$sender->getAllowFlight()){
-                    $sender->setAllowFlight(true);
-                    $sender->setFlying(true);
-                    $sender->sendMessage($this->getConfig()->get("fly_enabled"));
+            if(empty($args[0])){
+                if(!$sender->isCreative()){
+                    $sender->setAllowFlight($sender->getAllowFlight() === false ? true : false);
+                    $message = [
+                        true => $this->getConfig()->get("fly-enabled"),
+                        false => $this->getConfig()->get("fly-disabled")
+                    ];
+                    $sender->sendMessage($message[$sender->getAllowFlight()]);
                 }else{
-                    $sender->setAllowFlight(false);
-                    $sender->setFlying(false);
-                    $sender->sendMessage($this->getConfig()->get("fly_disabled"));
+                    $sender->sendMessage(self::PREFIX . TextFormat::RED . "You can only use this command in survival mode");
+                    return false;
+                }
+                return false;
+            }
+            if($this->getServer()->getPlayer($args[0])){
+                $player = $this->getServer()->getPlayer($args[0]);
+                if(!$player->isCreative()){
+                    $player->setAllowFlight($player->getAllowFlight() === false ? true : false);
+                    $message = [
+                        true => $this->getConfig()->get("fly-enabled"),
+                        false => $this->getConfig()->get("fly-disabled")
+                    ];
+                    $player->sendMessage($message[$sender->getAllowFlight()]);
+                    $message = [
+                        true => self::PREFIX . TextFormat::GREEN . "You have enabled fly for " . $player->getName(),
+                        false => self::PREFIX . TextFormat::RED . "You have disabled fly for " . $player->getName()
+                    ];
+                    $sender->sendMessage($message[$player->getAllowFlight()]);
+                }else{
+                    $sender->sendMessage(self::PREFIX . TextFormat::RED . $player->getName() . " is in creative mode");
+                    return false;
                 }
             }else{
-                $sender->sendMessage(self::PREFIX . TextFormat::RED . "You can only use this command in survival mode");
+                $sender->sendMessage(self::PREFIX . TextFormat::RED . "Player not found");
                 return false;
             }
         }
@@ -83,7 +104,7 @@ class BlazinFly extends PluginBase implements Listener{
 
     public function onDamage(EntityDamageEvent $event) : void{
         $entity = $event->getEntity();
-        if($this->getConfig()->get("onDamage_FlyReset") === true){
+        if($this->getConfig()->get("onDamage-FlyReset") === true){
             if($event instanceof EntityDamageByEntityEvent){
                 if($entity instanceof Player){
                     $damager = $event->getDamager();

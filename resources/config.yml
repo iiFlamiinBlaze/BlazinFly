@@ -8,20 +8,20 @@
 # BlazinFly Configuration File:
 # Use the § symbol for color coding.
 #   Default Config:
-#      onJoin_FlyReset: true
-#      onDamage_FlyReset: true
-#      fly_enabled: "Flight mode activated"
-#      fly_disabled: "Flight mode deactivated"
+#      onJoin-FlyReset: true
+#      onDamage-FlyReset: true
+#      fly-enabled: "Flight mode activated"
+#      fly-disabled: "Flight mode deactivated"
 
 # The below config allows the plugin to reset flight mode when joining the server
-onJoin_FlyReset: true
+onJoin-FlyReset: true
 
 # The below config allows the plugin to reset flight mode when pvping in the server
-onDamage_FlyReset: true
+onDamage-FlyReset: true
 
 # The below config allows you to send a message to the player when they enable fly
-fly_enabled: "§aFlight mode activated"
+fly-enabled: "§aFlight mode activated"
 
 # The below config allows you to send a message to the player when they disable fly
-fly_disabled: "§cFlight mode deactivated"
+fly-disabled: "§cFlight mode deactivated"
 ...
