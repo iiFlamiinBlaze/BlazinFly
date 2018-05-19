@@ -21,6 +21,7 @@ declare(strict_types=1);
 
 namespace iiFlamiinBlaze\BlazinFly;
 
+use pocketmine\entity\Entity;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\Player;
@@ -33,14 +34,25 @@ use pocketmine\utils\TextFormat;
 
 class BlazinFly extends PluginBase implements Listener{
 
-    const PREFIX = TextFormat::AQUA . "BlazinFly" . TextFormat::GOLD . " > ";
-    const VERSION = "v1.8.4";
+    private const PREFIX = TextFormat::AQUA . "BlazinFly" . TextFormat::GOLD . " > ";
+    private const VERSION = "v1.8.5";
 
     public function onEnable() : void{
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
         $this->getLogger()->info("BlazinFly " . self::VERSION . " by iiFlamiinBlaze enabled");
+    }
+
+    private function multiWorldCheck(Entity $entity) : bool{
+        if(!$entity instanceof Player) return false;
+        if($this->getConfig()->get("multi-world") === "on"){
+            if(!in_array($entity->getLevel()->getName(), $this->getConfig()->get("worlds"))){
+                $entity->sendMessage(self::PREFIX . TextFormat::RED . "You are not in the right world to be able to use the fly command");
+                return false;
+            }
+        }elseif($this->getConfig()->get("multi-world") === "off") return true;
+        return true;
     }
 
     public function onJoin(PlayerJoinEvent $event) : void{
@@ -64,6 +76,7 @@ class BlazinFly extends PluginBase implements Listener{
             }
             if(empty($args[0])){
                 if(!$sender->isCreative()){
+                    if($this->multiWorldCheck($sender) === false) return false;
                     $sender->setAllowFlight($sender->getAllowFlight() === false ? true : false);
                     $message = [
                         true => $this->getConfig()->get("fly-enabled"),
@@ -79,6 +92,7 @@ class BlazinFly extends PluginBase implements Listener{
             if($this->getServer()->getPlayer($args[0])){
                 $player = $this->getServer()->getPlayer($args[0]);
                 if(!$player->isCreative()){
+                    if($this->multiWorldCheck($player) === false) return false;
                     $player->setAllowFlight($player->getAllowFlight() === false ? true : false);
                     $message = [
                         true => $this->getConfig()->get("fly-enabled"),
