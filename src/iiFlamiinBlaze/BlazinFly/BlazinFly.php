@@ -60,7 +60,7 @@ class BlazinFly extends PluginBase implements Listener{
         if($this->getConfig()->get("onJoin-FlyReset") === true){
             if($player->isCreative()) return;
             $player->setAllowFlight(false);
-            $player->sendMessage($this->getConfig()->get("fly_disabled"));
+            $player->sendMessage($this->getConfig()->get("fly-disabled"));
         }
     }
 
