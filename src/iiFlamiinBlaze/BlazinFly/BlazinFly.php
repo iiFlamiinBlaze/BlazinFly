@@ -49,6 +49,10 @@ class BlazinFly extends PluginBase implements Listener{
 		if($this->getConfig()->get("multi-world") === "on"){
 			if(!in_array($entity->getLevel()->getName(), $this->getConfig()->get("worlds"))){
 				$entity->sendMessage(self::PREFIX . TextFormat::RED . "You are not in the right world to be able to use the fly command");
+				if(!$entity->isCreative()){
+					$entity->setFlying(false);
+					$entity->setAllowFlight(false);
+				}
 				return false;
 			}
 		}elseif($this->getConfig()->get("multi-world") === "off") return true;
