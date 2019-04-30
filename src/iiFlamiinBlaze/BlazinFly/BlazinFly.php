@@ -83,6 +83,7 @@ class BlazinFly extends PluginBase implements Listener{
 					if($this->multiWorldCheck($sender) === false) return false;
 					$sender->sendMessage($sender->getAllowFlight() === false ? $this->getConfig()->get("fly-enabled") : $this->getConfig()->get("fly-disabled"));
 					$sender->setAllowFlight($sender->getAllowFlight() === false ? true : false);
+					$sender->setFlying($sender->isFlying() === false ? true : false);
 				}else{
 					$sender->sendMessage(self::PREFIX . TextFormat::RED . "You can only use this command in survival mode");
 					return false;
@@ -96,6 +97,7 @@ class BlazinFly extends PluginBase implements Listener{
 					$player->sendMessage($player->getAllowFlight() === false ? $this->getConfig()->get("fly-enabled") : $this->getConfig()->get("fly-disabled"));
 					$sender->sendMessage($player->getAllowFlight() === false ? self::PREFIX . TextFormat::GREEN . "You have enabled fly for " . $player->getName() : self::PREFIX . TextFormat::RED . "You have disabled fly for " . $player->getName());
 					$player->setAllowFlight($player->getAllowFlight() === false ? true : false);
+					$player->setFlying($player->isFlying() === false ? true : false);
 				}else{
 					$sender->sendMessage(self::PREFIX . TextFormat::RED . $player->getName() . " is in creative mode");
 					return false;
