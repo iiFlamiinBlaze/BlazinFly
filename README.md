@@ -17,4 +17,4 @@ If you have any issues with the plugin, please make an issue [here](https://gith
 * Credits: [BlazeTheDev](https://github.com/iiFlamiinBlaze)
 
 ## How to use
-For more info about how to use the plugin go to the [BlazinFly Wiki](https://iiflamiinblaze.github.io/projects/blazinfly/).
+For more info about how to use the plugin go to the [BlazinFly Wiki](https://iiflamiinblaze.github.io/blazinfly/).

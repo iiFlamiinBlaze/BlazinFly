@@ -11,3 +11,6 @@ permissions:
   fly.command:
     description: "BlazinFly command permission"
     default: op
+  fly.other:
+    description: "Allow you to activate fly for other players"
+    default: op
