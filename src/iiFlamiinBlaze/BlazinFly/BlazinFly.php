@@ -90,7 +90,7 @@ class BlazinFly extends PluginBase implements Listener{
 				}
 				return false;
                         }
-                        if(!$sender->hasPermission("fly.command.other")){
+                        if(!$sender->hasPermission("fly.other")){
                                 $sender->sendMessage(self::PREFIX . TextFormat::RED . "You do not have permission to use this command");
                                 return false;
 			}
