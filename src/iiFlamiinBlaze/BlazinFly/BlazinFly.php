@@ -34,7 +34,7 @@ use pocketmine\utils\TextFormat;
 
 class BlazinFly extends PluginBase implements Listener{
 
-	private const PREFIX = TextFormat::AQUA . "BlazinFly" . TextFormat::GOLD . " > ";
+	private const PREFIX = TextFormat::AQUA . "EPE" . TextFormat::RED . " > ";
 	private const VERSION = "v1.8.6";
 
 	public function onEnable() : void{
