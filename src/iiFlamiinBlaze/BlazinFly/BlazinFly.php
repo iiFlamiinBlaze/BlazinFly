@@ -35,7 +35,7 @@ use pocketmine\utils\TextFormat;
 class BlazinFly extends PluginBase implements Listener{
 
 	private const PREFIX = TextFormat::AQUA . "BlazinFly" . TextFormat::GOLD . " > ";
-	private const VERSION = "v1.8.6";
+	private const VERSION = "v1.8.7";
 
 	public function onEnable() : void{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
