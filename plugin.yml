@@ -8,9 +8,9 @@ commands:
   fly:
     description: "Command which allows flight when in Survival Mode!"
 permissions:
-  fly.command:
+  blazinfly.command:
     description: "BlazinFly command permission"
     default: op
-  fly.other:
+  blazinfly.other:
     description: "Allow you to activate fly for other players"
     default: op

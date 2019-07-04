@@ -41,7 +41,6 @@ class BlazinFly extends PluginBase implements Listener{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		@mkdir($this->getDataFolder());
 		$this->saveDefaultConfig();
-		$this->getLogger()->info("BlazinFly " . self::VERSION . " by iiFlamiinBlaze enabled");
 	}
 
 	private function multiWorldCheck(Entity $entity) : bool{
@@ -74,7 +73,7 @@ class BlazinFly extends PluginBase implements Listener{
 				$sender->sendMessage(self::PREFIX . TextFormat::RED . "Use this command in-game");
 				return false;
 			}
-			if(!$sender->hasPermission("fly.command")){
+			if(!$sender->hasPermission("blazinfly.command")){
 				$sender->sendMessage(self::PREFIX . TextFormat::RED . "You do not have permission to use this command");
 				return false;
 			}
@@ -90,7 +89,7 @@ class BlazinFly extends PluginBase implements Listener{
 				}
 				return false;
 			}
-			if(!$sender->hasPermission("fly.other")){
+			if(!$sender->hasPermission("blazinfly.other")){
 				$sender->sendMessage(self::PREFIX . TextFormat::RED . "You do not have permission to enable flight for others");
 				return false;
 			}
