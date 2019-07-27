@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace iiFlamiinBlaze\BlazinFly;
 
 use pocketmine\entity\Entity;
+use pocketmine\event\entity\EntityLevelChangeEvent;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\Player;
@@ -34,8 +35,8 @@ use pocketmine\utils\TextFormat;
 
 class BlazinFly extends PluginBase implements Listener{
 
-	private const PREFIX = TextFormat::AQUA . "BlazinFly" . TextFormat::GOLD . " > ";
-	private const VERSION = "v1.8.7";
+	const PREFIX = TextFormat::AQUA . "BlazinFly" . TextFormat::GOLD . " > ";
+	const VERSION = "v1.8.7";
 
 	public function onEnable() : void{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -47,7 +48,7 @@ class BlazinFly extends PluginBase implements Listener{
 		if(!$entity instanceof Player) return false;
 		if($this->getConfig()->get("multi-world") === "on"){
 			if(!in_array($entity->getLevel()->getName(), $this->getConfig()->get("worlds"))){
-				$entity->sendMessage(self::PREFIX . TextFormat::RED . "You are not in the right world to be able to use the fly command");
+				$entity->sendMessage(self::PREFIX . TextFormat::RED . "This world does not allow flight");
 				if(!$entity->isCreative()){
 					$entity->setFlying(false);
 					$entity->setAllowFlight(false);
@@ -65,6 +66,11 @@ class BlazinFly extends PluginBase implements Listener{
 			$player->setAllowFlight(false);
 			$player->sendMessage($this->getConfig()->get("fly-disabled"));
 		}
+	}
+
+	public function onLevelChange(EntityLevelChangeEvent $event) : void{
+		$entity = $event->getEntity();
+		if($entity instanceof Player) $this->multiWorldCheck($entity);
 	}
 
 	public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
