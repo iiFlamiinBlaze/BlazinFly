@@ -1,5 +1,8 @@
 # [![BlazeTheDev](https://i.imgur.com/fgVMXSe.png?1)]()
 
+## Note
+ This branch is a legacy branch made for pm 3.0. **This instance of the plugin will only work on PM servers running 3.x.x**
+
 ## License
 | License |
 | :---: |
