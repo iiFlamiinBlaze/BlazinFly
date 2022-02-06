@@ -99,8 +99,8 @@ class BlazinFly extends PluginBase implements Listener{
 				$sender->sendMessage(self::PREFIX . TextFormat::RED . "You do not have permission to enable flight for others");
 				return false;
 			}
-			if($this->getServer()->getPlayerExact($args[0])){
-				$player = $this->getServer()->getPlayerExact($args[0]);
+			if($this->getServer()->getPlayerByPrefix($args[0])){
+				$player = $this->getServer()->getPlayerByPrefix($args[0]);
 				if(!$player->isCreative()){
 					if($this->multiWorldCheck($player) === false) return false;
 					$player->sendMessage($player->getAllowFlight() === false ? $this->getConfig()->get("fly-enabled") : $this->getConfig()->get("fly-disabled"));
