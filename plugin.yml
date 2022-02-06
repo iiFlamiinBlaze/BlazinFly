@@ -1,11 +1,12 @@
 name: BlazinFly
 main: iiFlamiinBlaze\BlazinFly\BlazinFly
 description: An advanced survival fly plugin!
-version: 1.8.7
-api: 3.0.0
+version: 1.9.0
+api: 4.0.0
 author: iiFlamiinBlaze
 commands:
   fly:
+    permission: "blazinfly.command"
     description: "Command which allows flight when in Survival Mode!"
 permissions:
   blazinfly.command:

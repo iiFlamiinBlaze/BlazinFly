@@ -22,10 +22,10 @@ declare(strict_types=1);
 namespace iiFlamiinBlaze\BlazinFly;
 
 use pocketmine\entity\Entity;
-use pocketmine\event\entity\EntityLevelChangeEvent;
+use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
@@ -36,7 +36,7 @@ use pocketmine\utils\TextFormat;
 class BlazinFly extends PluginBase implements Listener{
 
 	const PREFIX = TextFormat::AQUA . "BlazinFly" . TextFormat::GOLD . " > ";
-	const VERSION = "v1.8.7";
+	const VERSION = "v1.9.0";
 
 	public function onEnable() : void{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -47,7 +47,7 @@ class BlazinFly extends PluginBase implements Listener{
 	private function multiWorldCheck(Entity $entity) : bool{
 		if(!$entity instanceof Player) return false;
 		if($this->getConfig()->get("multi-world") === "on"){
-			if(!in_array($entity->getLevel()->getName(), $this->getConfig()->get("worlds"))){
+			if(!in_array($entity->getWorld()->getDisplayName(), $this->getConfig()->get("worlds"))){
 				$entity->sendMessage(self::PREFIX . TextFormat::RED . "This world does not allow flight");
 				if(!$entity->isCreative()){
 					$entity->setFlying(false);
@@ -68,7 +68,7 @@ class BlazinFly extends PluginBase implements Listener{
 		}
 	}
 
-	public function onLevelChange(EntityLevelChangeEvent $event) : void{
+	public function onLevelChange(EntityTeleportEvent $event) : void{
 		$entity = $event->getEntity();
 		if($entity instanceof Player) $this->multiWorldCheck($entity);
 	}
@@ -88,7 +88,7 @@ class BlazinFly extends PluginBase implements Listener{
 					if($this->multiWorldCheck($sender) === false) return false;
 					$sender->sendMessage($sender->getAllowFlight() === false ? $this->getConfig()->get("fly-enabled") : $this->getConfig()->get("fly-disabled"));
 					$sender->setAllowFlight($sender->getAllowFlight() === false ? true : false);
-					$sender->setFlying($sender->isFlying() === false ? true : false);
+					if($sender->getAllowFlight() === false && $sender->isFlying()) $sender->setFlying(false);
 				}else{
 					$sender->sendMessage(self::PREFIX . TextFormat::RED . "You can only use this command in survival mode");
 					return false;
@@ -99,14 +99,14 @@ class BlazinFly extends PluginBase implements Listener{
 				$sender->sendMessage(self::PREFIX . TextFormat::RED . "You do not have permission to enable flight for others");
 				return false;
 			}
-			if($this->getServer()->getPlayer($args[0])){
-				$player = $this->getServer()->getPlayer($args[0]);
+			if($this->getServer()->getPlayerExact($args[0])){
+				$player = $this->getServer()->getPlayerExact($args[0]);
 				if(!$player->isCreative()){
 					if($this->multiWorldCheck($player) === false) return false;
 					$player->sendMessage($player->getAllowFlight() === false ? $this->getConfig()->get("fly-enabled") : $this->getConfig()->get("fly-disabled"));
 					$sender->sendMessage($player->getAllowFlight() === false ? self::PREFIX . TextFormat::GREEN . "You have enabled fly for " . $player->getName() : self::PREFIX . TextFormat::RED . "You have disabled fly for " . $player->getName());
 					$player->setAllowFlight($player->getAllowFlight() === false ? true : false);
-					$player->setFlying($player->isFlying() === false ? true : false);
+					if($sender->getAllowFlight() === false && $sender->isFlying()) $sender->setFlying(false);
 				}else{
 					$sender->sendMessage(self::PREFIX . TextFormat::RED . $player->getName() . " is in creative mode");
 					return false;
