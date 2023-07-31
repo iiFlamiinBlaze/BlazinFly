@@ -1,8 +1,8 @@
 name: BlazinFly
 main: iiFlamiinBlaze\BlazinFly\BlazinFly
 description: An advanced survival fly plugin!
-version: 1.9.0
-api: 4.0.0
+version: 2.0.0
+api: 5.0.0
 author: iiFlamiinBlaze
 commands:
   fly:
